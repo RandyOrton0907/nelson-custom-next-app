@@ -287,7 +287,7 @@ export default function Home(props) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const res = await getData("products");
   const resBlog = await getData("blog");
   return {
@@ -296,6 +296,5 @@ export async function getStaticProps() {
       blog: resBlog.blog,
       seo: { title: "Nelson - Home Page" },
     },
-    revalidate: 10,
   };
 }
