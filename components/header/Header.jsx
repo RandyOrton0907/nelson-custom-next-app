@@ -13,8 +13,10 @@ const Header = () => {
   const logUser = () => {
     return (
       <>
-        <button>
-          <img className="nls-avatar" src={auth.user.avatar} alt="" />
+        <div className="nls-btn-hvr">
+          <Link href="">
+            <img className="nls-avatar" src={auth.user.avatar} alt="" />
+          </Link>
           <ul className="nls-b-content">
             <li>
               <div className="nls-b-item nls-loguser">
@@ -56,7 +58,7 @@ const Header = () => {
               </ul>
             </li>
           </ul>
-        </button>
+        </div>
       </>
     );
   };
@@ -78,26 +80,29 @@ const Header = () => {
   }, [total]);
 
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalIsOpenMobile, setIsOpenMobile] = useState(false);
 
   function openModal() {
     setIsOpen(true);
   }
-
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
+  function OpenMobile() {
+    setIsOpenMobile(true);
   }
 
   function closeModal() {
     setIsOpen(false);
   }
+  function closeModalMobile() {
+    setIsOpenMobile(false);
+  }
+
   const [search, setSearch] = useState("");
-  useEffect(() => {
-    filterSearch({ router, search: search ? search.toLowerCase() : "all" });
-  }, [search]);
+
   const handleSearch = (e) => {
     setSearch(e.target.value);
     filterSearch({ router, search: search });
   };
+
   return (
     <>
       <header>
@@ -136,7 +141,7 @@ const Header = () => {
                 <i className="fa-light fa-magnifying-glass"></i>
               </button>
               {Object.keys(auth).length === 0 ? (
-                <button>
+                <div className="nls-btn-hvr">
                   {Object.keys(auth).length == 0 ? (
                     <Link href="/user">
                       <i className="fa-light fa-user"></i>
@@ -177,11 +182,11 @@ const Header = () => {
                       </ul>
                     </li>
                   </ul>
-                </button>
+                </div>
               ) : (
                 logUser()
               )}
-              <button>
+              <div className="nls-btn-hvr">
                 <Link href="/cart">
                   <i className="fa-light fa-cart-shopping"></i>
                 </Link>
@@ -190,7 +195,7 @@ const Header = () => {
                   <div className="nls-b-header">
                     {Object.keys(cart).length == 0 ? (
                       <div className="nls-b-item">
-                        <span>Not Item</span>
+                        <span>No Item</span>
                       </div>
                     ) : (
                       cart.map((item) => (
@@ -200,7 +205,7 @@ const Header = () => {
                           </div>
                           <div className="nls-content-item">
                             <div className="nls-b-header">
-                              <a href="">{item.name}</a>
+                              <Link href="">{item.name}</Link>
                             </div>
                             <div className="nls-b-body">
                               <span>
@@ -235,7 +240,7 @@ const Header = () => {
                     )}
                   </div>
                 </div>
-              </button>
+              </div>
             </div>
           </div>
         </div>
@@ -243,20 +248,26 @@ const Header = () => {
       <header className="nls-mobile-header">
         <div className="nls-container">
           <div className="nls-b-logo">
-            <img
-              src="https://htmldemo.net/nelson/nelson/assets/images/logo.png"
-              alt=""
-            />
+            <Link href="/">
+              <img
+                src="https://htmldemo.net/nelson/nelson/assets/images/logo.png"
+                alt=""
+              />
+            </Link>
           </div>
           <div className="nls-mobile-nav">
             <ul>
               <li>
-                <a href="">
+                <Link href="/cart">
                   <i className="fa-light fa-cart-shopping"></i>
-                </a>
+                </Link>
               </li>
               <li>
-                <button className="nls-bars-nav">
+                <button
+                  className="nls-bars-nav"
+                  type="button"
+                  onClick={OpenMobile}
+                >
                   <i className="fa-regular fa-bars"></i>
                 </button>
               </li>
@@ -266,7 +277,6 @@ const Header = () => {
       </header>
       <Modal
         isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
         className="nls-modal active"
         contentLabel="Example Modal"
@@ -284,12 +294,13 @@ const Header = () => {
           </div>
           <div className="nls-modal-search">
             <div className="nls-container">
-              <form autoComplete="off">
+              <form action="/shop" method="GET">
                 <div className="nls-form-group">
                   <input
                     type="text"
                     placeholder=""
-                    value={search.toLowerCase()}
+                    name="search"
+                    value={search}
                     onChange={handleSearch}
                   />
                   <button type="reset">
@@ -297,6 +308,118 @@ const Header = () => {
                   </button>
                 </div>
               </form>
+            </div>
+          </div>
+        </div>
+      </Modal>
+      <Modal
+        isOpen={modalIsOpenMobile}
+        className="nls-modal active"
+        onRequestClose={closeModalMobile}
+        ariaHideApp={false}
+      >
+        <div className="nls-mobile-menu active">
+          <div className="nls-b-nav active">
+            <div className="nls-b-close">
+              <button type="button" onClick={closeModalMobile}>
+                <i className="fa-regular fa-xmark"></i>
+              </button>
+            </div>
+            <div className="nls-mobile-nav">
+              <div className="nls-b-header">
+                <div className="nls-b-search">
+                  <form action="/shop" method="GET">
+                    <div className="nls-form-group">
+                      <input
+                        type="text"
+                        placeholder="Search ..."
+                        name="search"
+                        value={search}
+                        onChange={handleSearch}
+                      />
+                      <button type="reset" className="nls-btn-clear">
+                        <i className="fa-regular fa-xmark"></i>
+                      </button>
+                      <button className="nls-btn-search" type="submit">
+                        <i className="fa-solid fa-magnifying-glass"></i>
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div className="nls-b-body">
+                <div className="nls-b-item">
+                  <ul>
+                    <li>
+                      <Link href="/">Home</Link>
+                    </li>
+                    <li>
+                      <Link href="/shop">Shop</Link>
+                    </li>
+                    <li>
+                      <Link href="/blog">Blog</Link>
+                    </li>
+                    <li>
+                      <Link href="/contact">Contact</Link>
+                    </li>
+                  </ul>
+                </div>
+                <div className="nls-b-item style-2">
+                  <ul>
+                    <li>
+                      {Object.keys(auth).length === 0 ? (
+                        <Link href="/user">Login</Link>
+                      ) : (
+                        <Link href="">My Account</Link>
+                      )}
+                    </li>
+                    <li>
+                      <Link href="/cart">Cart</Link>
+                    </li>
+                    <li>
+                      <Link href="/wishlist">Wishlist</Link>
+                    </li>
+                  </ul>
+                </div>
+                <div className="nls-b-item">
+                  <span>(1245) 2456 012</span>
+                  <span>info@yourdomain.com</span>
+                </div>
+              </div>
+              <div className="nls-b-footer">
+                <ul>
+                  <li>
+                    <a href="">
+                      <i className="fa-brands fa-twitter"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="">
+                      <i className="fa-brands fa-facebook-f"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="">
+                      <i className="fa-brands fa-google-plus-g"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="">
+                      <i className="fa-brands fa-pinterest"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="">
+                      <i className="fa-brands fa-instagram"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="">
+                      <i className="fa-brands fa-vimeo-v"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>

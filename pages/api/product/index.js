@@ -19,7 +19,10 @@ class ApiFeatures {
     const queryObj = { ...this.querystr };
     if (queryObj.category !== "all")
       this.query.find({ _cateId: queryObj.category });
-    if (queryObj.search !== "all") this.query.find({ name: queryObj.search });
+    if (queryObj.search !== "all")
+      this.query.find({
+        name: { $regex: queryObj.search, $options: "i" },
+      });
     if (queryObj.size !== "all")
       this.query.find({ size: { $all: [queryObj.size] } });
     if (queryObj.price !== "all")

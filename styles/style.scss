@@ -60,6 +60,7 @@ header {
       }
       .nls-b-meta {
         display: flex;
+        align-items: center;
         button {
           padding: 8px;
           text-align: center;
@@ -68,8 +69,24 @@ header {
           background: none;
           margin-left: 5px;
           position: relative;
+          cursor: pointer;
           i {
             font-size: 24px;
+          }
+        }
+        .nls-btn-hvr {
+          padding: 8px;
+          outline: 0;
+          background: none;
+          margin-left: 5px;
+          position: relative;
+          text-align: center;
+          text-decoration: none;
+          i {
+            font-size: 24px;
+          }
+          a {
+            color: #111;
           }
           .nls-avatar {
             width: 30px;

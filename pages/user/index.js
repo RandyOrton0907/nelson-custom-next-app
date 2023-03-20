@@ -4,7 +4,7 @@ import { useState, useContext, useEffect } from "react";
 import { DataContext } from "../../stores/GlobalState";
 import Cookies from "js-cookie";
 import { postData } from "../../utils/fetchData";
-import { useRouter, Router } from "next/router";
+import { useRouter } from "next/router";
 
 const Login = (props) => {
   const initialState = {
@@ -15,6 +15,7 @@ const Login = (props) => {
   const { userName, passWord } = userData;
   const { state, dispatch } = useContext(DataContext);
   const { auth } = state;
+  const Router = useRouter();
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });

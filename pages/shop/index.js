@@ -15,6 +15,7 @@ const Shop = (props) => {
   const { wishlist, cart } = state;
   const [qty, setQty] = useState(1);
   const [Tab, setTab] = useState(true);
+
   useEffect(() => {
     setProducts(props.products);
   }, [props.products]);
@@ -194,18 +195,22 @@ const Shop = (props) => {
                         />
                       ))
                     )}
-                    <div className="nls-b-pagination">
-                      <ReactPaginate
-                        className=""
-                        breakLabel="..."
-                        activeClassName="active"
-                        onPageChange={handlePageClick}
-                        pageRangeDisplayed={5}
-                        pageCount={pageCount}
-                        // previousLabel="< previous"
-                        renderOnZeroPageCount={null}
-                      />
-                    </div>
+                    {currentItems.length === 0 ? (
+                      ""
+                    ) : (
+                      <div className="nls-b-pagination">
+                        <ReactPaginate
+                          className=""
+                          breakLabel="..."
+                          activeClassName="active"
+                          onPageChange={handlePageClick}
+                          pageRangeDisplayed={5}
+                          pageCount={pageCount}
+                          // previousLabel="< previous"
+                          renderOnZeroPageCount={null}
+                        />
+                      </div>
+                    )}
                   </div>
                 ) : (
                   <div className="nls-b-tab tab-2 active">
@@ -224,18 +229,22 @@ const Shop = (props) => {
                         />
                       ))
                     )}
-                    <div className="nls-b-pagination">
-                      <ReactPaginate
-                        className=""
-                        breakLabel="..."
-                        activeClassName="active"
-                        onPageChange={handlePageClick}
-                        pageRangeDisplayed={5}
-                        pageCount={pageCount}
-                        // previousLabel="< previous"
-                        renderOnZeroPageCount={null}
-                      />
-                    </div>
+                    {currentItems.length === 0 ? (
+                      ""
+                    ) : (
+                      <div className="nls-b-pagination">
+                        <ReactPaginate
+                          className=""
+                          breakLabel="..."
+                          activeClassName="active"
+                          onPageChange={handlePageClick}
+                          pageRangeDisplayed={5}
+                          pageCount={pageCount}
+                          // previousLabel="< previous"
+                          renderOnZeroPageCount={null}
+                        />
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
