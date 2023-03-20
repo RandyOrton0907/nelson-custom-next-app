@@ -287,7 +287,7 @@ export default function Home(props) {
   );
 }
 
-export async function getInitialProps() {
+export async function getServerSideProps() {
   const res = await getData("products");
   const resBlog = await getData("blog");
   return {
