@@ -59,8 +59,7 @@ const ProductItem = ({ products, tab, disp, wishlist, cart, qty }) => {
             <span className="nls-b-price-percent">
               {products.discount == "" || products.discount == 0
                 ? ""
-                : products.discount}
-              %
+                : products.discount + "%"}
             </span>
             <div className="nls-img">
               <Link href={"/shop/" + products._id}>
@@ -80,7 +79,13 @@ const ProductItem = ({ products, tab, disp, wishlist, cart, qty }) => {
                     </span>
                   </li>
                   <li>
-                    <del className="nls-txt-price-del">${products.price}</del>
+                    <del className="nls-txt-price-del">
+                      {products.price != "" ||
+                      products.price != null ||
+                      products.price != undefined
+                        ? ""
+                        : "$" + products.price}
+                    </del>
                   </li>
                 </ul>
               </div>
