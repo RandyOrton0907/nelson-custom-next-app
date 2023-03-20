@@ -132,7 +132,7 @@ export default function Home(props) {
                         setPopular(false);
                       }}
                     >
-                      HOME
+                      SECTIONAL
                     </button>
                   ) : (
                     <button
@@ -141,7 +141,7 @@ export default function Home(props) {
                         setPopular(false);
                       }}
                     >
-                      HOME
+                      SECTIONAL
                     </button>
                   )}
                 </li>
@@ -202,7 +202,25 @@ export default function Home(props) {
                 </div>
                 <div className="nls-b-item">
                   <img
-                    src="https://htmldemo.net/nelson/nelson/assets/images/brands/brand-1.png"
+                    src="https://htmldemo.net/nelson/nelson/assets/images/brands/brand-2.png"
+                    alt=""
+                  />
+                </div>
+                <div className="nls-b-item">
+                  <img
+                    src="https://htmldemo.net/nelson/nelson/assets/images/brands/brand-3.png"
+                    alt=""
+                  />
+                </div>
+                <div className="nls-b-item">
+                  <img
+                    src="https://htmldemo.net/nelson/nelson/assets/images/brands/brand-4.png"
+                    alt=""
+                  />
+                </div>
+                <div className="nls-b-item">
+                  <img
+                    src="https://htmldemo.net/nelson/nelson/assets/images/brands/brand-5.png"
                     alt=""
                   />
                 </div>
@@ -214,31 +232,13 @@ export default function Home(props) {
                 </div>
                 <div className="nls-b-item">
                   <img
-                    src="https://htmldemo.net/nelson/nelson/assets/images/brands/brand-1.png"
+                    src="https://htmldemo.net/nelson/nelson/assets/images/brands/brand-2.png"
                     alt=""
                   />
                 </div>
                 <div className="nls-b-item">
                   <img
-                    src="https://htmldemo.net/nelson/nelson/assets/images/brands/brand-1.png"
-                    alt=""
-                  />
-                </div>
-                <div className="nls-b-item">
-                  <img
-                    src="https://htmldemo.net/nelson/nelson/assets/images/brands/brand-1.png"
-                    alt=""
-                  />
-                </div>
-                <div className="nls-b-item">
-                  <img
-                    src="https://htmldemo.net/nelson/nelson/assets/images/brands/brand-1.png"
-                    alt=""
-                  />
-                </div>
-                <div className="nls-b-item">
-                  <img
-                    src="https://htmldemo.net/nelson/nelson/assets/images/brands/brand-1.png"
+                    src="https://htmldemo.net/nelson/nelson/assets/images/brands/brand-3.png"
                     alt=""
                   />
                 </div>
@@ -287,7 +287,7 @@ export default function Home(props) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getInitialProps() {
   const res = await getData("products");
   const resBlog = await getData("blog");
   return {
