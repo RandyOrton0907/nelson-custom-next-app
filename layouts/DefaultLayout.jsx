@@ -7,11 +7,11 @@ import {
   Nofity,
   Newsletter,
 } from "../components";
+
 const DefaultLayout = ({
   seo = {},
   showFooter = true,
   children,
-
   breakcrumb = false,
 }) => {
   return (

@@ -1,6 +1,7 @@
 import connectDB from "../../../utils/connectDB";
 import Users from "../../../models/userModels";
 import jwt from "jsonwebtoken";
+import Order from "../../../models/orderModels";
 import {
   CreateAccessToken,
   CreateRefreshToken,
@@ -18,6 +19,7 @@ export default async function handle(req, res) {
         .status(400)
         .json({ err: "Your token is incorrect or has exprired" });
     const user = await Users.findById(result.id);
+    const order = await Order.find();
     if (!user) return res.status(400).json({ err: "User does not exist" });
     const access_token = CreateRefreshToken({ id: user._id });
     res.json({
@@ -28,6 +30,7 @@ export default async function handle(req, res) {
       firstName: user.firstName,
       lastName: user.lastName,
       phoneNumber: user.phoneNumber,
+      address: user.address,
       role: user.role,
       avatar: user.avatar,
       root: user.root,

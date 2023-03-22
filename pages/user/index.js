@@ -3,7 +3,7 @@ import DefaultLayout from "../../layouts";
 import { useState, useContext, useEffect } from "react";
 import { DataContext } from "../../stores/GlobalState";
 import Cookies from "js-cookie";
-import { postData } from "../../utils/fetchData";
+import { getData, postData } from "../../utils/fetchData";
 import { useRouter } from "next/router";
 
 const Login = (props) => {
@@ -14,7 +14,7 @@ const Login = (props) => {
   const [userData, setUserData] = useState(initialState);
   const { userName, passWord } = userData;
   const { state, dispatch } = useContext(DataContext);
-  const { auth } = state;
+  const { auth, order } = state;
   const Router = useRouter();
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
@@ -25,17 +25,24 @@ const Login = (props) => {
     e.preventDefault();
     dispatch({ type: "NOFITY", payload: { loading: true } });
     const res = await postData("auth/login", userData);
+    const resOder = await getData("order");
+
     if (res.err)
       return dispatch({ type: "NOFITY", payload: { error: res.err } });
-
+    const dataOrderById = resOder.order.filter(
+      (item) => item.user == res.user._id
+    );
     dispatch({ type: "NOFITY", payload: { success: res.msg } });
     dispatch({
       type: "AUTH",
       payload: {
         token: res.access_token,
-        refresh: res.refresh_token,
         user: res.user,
       },
+    });
+    dispatch({
+      type: "ADD_ORDER",
+      payload: dataOrderById,
     });
 
     Cookies.set("refreshToken", res.refresh_token, {

@@ -3,6 +3,7 @@ export const ACTION = {
   AUTH: "AUTH",
   ADD_CART: "ADD_CART",
   ADD_WISHLIST: "ADD_WISHLIST",
+  ADD_ORDER: "ADD_ORDER",
 };
 export const addToCart = (products, cart, qty, size) => {
   if (products.productInventory === 0)

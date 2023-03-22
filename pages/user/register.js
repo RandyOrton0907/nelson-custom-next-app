@@ -48,6 +48,7 @@ const Register = (props) => {
     const res = await postData("auth/register", userData);
     if (res.err)
       return dispatch({ type: "NOFITY", payload: { error: res.err } });
+    router.push("/user");
     return dispatch({ type: "NOFITY", payload: { success: res.msg } });
   };
 

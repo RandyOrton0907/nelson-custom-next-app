@@ -22,6 +22,7 @@ const login = async (req, res) => {
   try {
     const { userName, passWord } = req.body;
     const user = await Users.findOne({ userName });
+
     if (!user) return res.status(400).json({ err: "this user dose not exist" });
     const isMatch = await bcrypt.compare(passWord, user.passWord);
     if (!isMatch) return res.status(400).json({ err: "incorrect password." });
@@ -38,23 +39,11 @@ const login = async (req, res) => {
         firstName: user.firstName,
         lastName: user.lastName,
         phoneNumber: user.phoneNumber,
+        address: user.address,
         role: user.role,
         avatar: user.avatar,
         root: user.root,
       },
-    });
-  } catch (error) {
-    res.status(500).json({ err: error.message });
-  }
-};
-
-const getUser = async (req, res) => {
-  try {
-    const user = await Users.find();
-    res.json({
-      status: "success",
-      result: user.length,
-      user,
     });
   } catch (error) {
     res.status(500).json({ err: error.message });

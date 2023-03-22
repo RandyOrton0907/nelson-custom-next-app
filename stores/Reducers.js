@@ -9,6 +9,8 @@ const reducers = (state, action) => {
       return { ...state, cart: action.payload };
     case ACTION.ADD_WISHLIST:
       return { ...state, wishlist: action.payload };
+    case ACTION.ADD_ORDER:
+      return { ...state, order: action.payload };
 
     default:
       return state;

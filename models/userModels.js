@@ -41,6 +41,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "https://static.thenounproject.com/png/5100711-200.png",
     },
+    address: {
+      type: String,
+      default: "",
+    },
   },
   { timestamps: true }
 );

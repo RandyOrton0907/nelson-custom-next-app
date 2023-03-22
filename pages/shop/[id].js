@@ -408,7 +408,7 @@ export async function getServerSideProps({ params: { id } }) {
   const res = await getData(`product/${id}`);
   const resAll = await getData(`products`);
   const cmt = await getData("cmtProduct");
-  const user = await getData("auth/login");
+  const user = await getData("user");
   return {
     props: {
       onlyProduct: res.product,

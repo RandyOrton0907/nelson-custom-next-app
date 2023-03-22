@@ -12,6 +12,7 @@ const Nofity = () => {
       {nofity.loading && <Loading />}
       {nofity.error && (
         <Toast
+          handle={false}
           msg={{ msg: nofity.err, title: "Error" }}
           handleShow={() => {
             dispatch({ type: "NOTIFY", payload: {} });
@@ -19,7 +20,7 @@ const Nofity = () => {
         />
       )}
       {nofity.success && (
-        <Toast msg={{ msg: nofity.success, title: "Success" }} />
+        <Toast msg={{ msg: nofity.success, title: "Success" }} handle={true} />
       )}
     </>
   );

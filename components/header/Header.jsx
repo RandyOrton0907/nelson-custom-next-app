@@ -38,7 +38,7 @@ const Header = () => {
               </div>
               <ul className="nls-b-item">
                 <li>
-                  <Link href="/user/account">My account</Link>
+                  <Link href="/user/profile">My account</Link>
                 </li>
                 <li>
                   <Link href="/cart">Cart</Link>
@@ -66,7 +66,9 @@ const Header = () => {
     Cookies.remove("refreshtoken", { path: "api/auth/accessToken" });
     localStorage.removeItem("firstLogin");
     dispatch({ type: "AUTH", payload: {} });
+    dispatch({ type: "ADD_ORDER", payload: {} });
     dispatch({ type: "NOFITY", payload: { success: "Logged Out!" } });
+    router.push("/");
   };
   const [total, setTotal] = useState(0);
   useEffect(() => {
@@ -147,7 +149,7 @@ const Header = () => {
                       <i className="fa-light fa-user"></i>
                     </Link>
                   ) : (
-                    <Link href="/account">
+                    <Link href="/user/profile">
                       <i className="fa-light fa-user"></i>
                     </Link>
                   )}
@@ -370,7 +372,7 @@ const Header = () => {
                       {Object.keys(auth).length === 0 ? (
                         <Link href="/user">Login</Link>
                       ) : (
-                        <Link href="">My Account</Link>
+                        <Link href="/user/profile">My Account</Link>
                       )}
                     </li>
                     <li>
