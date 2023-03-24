@@ -63,12 +63,13 @@ const Header = () => {
     );
   };
   const handleLogout = () => {
+    dispatch({ type: "NOFITY", payload: { loading: true } });
     Cookies.remove("refreshtoken", { path: "api/auth/accessToken" });
     localStorage.removeItem("firstLogin");
     dispatch({ type: "AUTH", payload: {} });
     dispatch({ type: "ADD_ORDER", payload: {} });
     dispatch({ type: "NOFITY", payload: { success: "Logged Out!" } });
-    router.push("/");
+    return router.push("/");
   };
   const [total, setTotal] = useState(0);
   useEffect(() => {

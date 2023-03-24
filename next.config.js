@@ -1,7 +1,7 @@
 module.exports = {
   env: {
-    // BASE_URL: "https://nelson-custom-next-app.vercel.app",
-    BASE_URL: "http://localhost:3000",
+    BASE_URL: "https://nelson-custom-next-app.vercel.app",
+    // BASE_URL: "http://localhost:3000",
     MONGODB_URL:
       "mongodb+srv://Kuroo:KYpLGZSeRvDOBkvK@cluster0.darnt5b.mongodb.net/Nelson?retryWrites=true&w=majority",
     ACCESS_TOKEN_SECRET: `123123123`,
@@ -12,5 +12,8 @@ module.exports = {
       "sk_test_51MigDFHkkJj0RYGqu14SooFhUYCICBTRxHiBjUIEa1TcCIquhKPJ7xOMTWnA2mfvkM7vqp0f1qqqVxllOWuXHs4200uldCHwqO",
     PAYPAL_CLIENT_ID:
       "AVxGtE0C5F_GrC4MwWowtIQ6CgMCmOT7eAa-87jaeV8ZEcue_PnKrLHTZtcETF6EPVoQwfXeQ0MKMlNP",
+    CLOUD_UPDATE_PRESET: "nelson_images",
+    CLOUD_NAME: "dvwu5kpdm",
+    CLOUD_API: "https://api.cloudinary.com/v1_1/dvwu5kpdm/image/upload",
   },
 };

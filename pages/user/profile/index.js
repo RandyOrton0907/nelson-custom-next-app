@@ -4,6 +4,10 @@ import DefaultLayout from "../../../layouts";
 import { DataContext } from "../../../stores/GlobalState";
 import { patchData } from "../../../utils/fetchData";
 import valid from "../../../utils/validForm";
+import { imageUpload } from "../../../utils/imageUpload";
+import Cookies from "js-cookie";
+import { useRouter } from "next/router";
+
 const Profile = (props) => {
   const initialSate = {
     firstName: "",
@@ -16,8 +20,16 @@ const Profile = (props) => {
   };
   const [Tab, setTab] = useState("dashboard");
   const [data, setData] = useState(initialSate);
-  const { firstName, lastName, phoneNumber, address, passWord, cfPassWord } =
-    data;
+  const router = useRouter();
+  const {
+    firstName,
+    lastName,
+    phoneNumber,
+    address,
+    passWord,
+    cfPassWord,
+    avatar,
+  } = data;
   const { state, dispatch } = useContext(DataContext);
   const { auth, order } = state;
   useEffect(() => {
@@ -36,7 +48,30 @@ const Profile = (props) => {
     setData({ ...data, [name]: value });
     dispatch({ type: "NOTIFY", payload: {} });
   };
+  const changeAvatar = (e) => {
+    const file = e.target.files[0];
+    if (!file)
+      return dispatch({
+        type: "NOTIFY",
+        payload: { error: "File does not exist." },
+      });
 
+    if (file.size > 1024 * 1024)
+      //1mb
+      return dispatch({
+        type: "NOTIFY",
+        payload: { error: "The largest image size is 1mb." },
+      });
+
+    if (file.type !== "image/jpeg" && file.type !== "image/png")
+      //1mb
+      return dispatch({
+        type: "NOTIFY",
+        payload: { error: "Image format is incorrect." },
+      });
+
+    setData({ ...data, avatar: file });
+  };
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
     if (passWord) {
@@ -53,6 +88,14 @@ const Profile = (props) => {
         return dispatch({ type: "NOFITY", payload: { error: errMsg } });
       updatePassword();
     }
+
+    if (
+      firstName !== auth.user.firstName ||
+      lastName !== auth.user.lastName ||
+      phoneNumber !== auth.user.phoneNumber ||
+      avatar != auth.user.avatar
+    )
+      updateInfo();
   };
   const updatePassword = () => {
     dispatch({ type: "NOFITY", payload: { loading: true } });
@@ -62,14 +105,51 @@ const Profile = (props) => {
       return dispatch({ type: "NOFITY", payload: { success: res.msg } });
     });
   };
+
+  const updateInfo = async () => {
+    dispatch({ type: "NOFITY", payload: { loading: true } });
+    let media = "";
+    if (avatar) {
+      media = await imageUpload([avatar]);
+    }
+    patchData(
+      "user",
+      {
+        firstName,
+        lastName,
+        phoneNumber,
+        address,
+        passWord,
+        cfPassWord,
+        avatar: avatar ? media[0].url : auth.user.avatar,
+      },
+      auth.token
+    ).then((res) => {
+      if (res.err)
+        return dispatch({ type: "NOFITY", payload: { error: res.msg } });
+      dispatch({
+        type: "AUTH",
+        payload: {
+          token: auth.token,
+          user: res.user,
+        },
+      });
+      return dispatch({ type: "NOFITY", payload: { success: res.msg } });
+    });
+  };
+
   const handleLogout = () => {
+    dispatch({ type: "NOFITY", payload: { loading: true } });
+
     Cookies.remove("refreshtoken", { path: "api/auth/accessToken" });
     localStorage.removeItem("firstLogin");
     dispatch({ type: "AUTH", payload: {} });
     dispatch({ type: "ADD_ORDER", payload: {} });
     dispatch({ type: "NOFITY", payload: { success: "Logged Out!" } });
-    router.push("/");
+    return router.push("/");
   };
+
+  if (!avatar) return null;
   if (!auth.user) return null;
   if (!order) return null;
   return (
@@ -234,13 +314,20 @@ const Profile = (props) => {
                     </div>
                     <div className="nls-b-body">
                       <div className="nls-avatar">
-                        <img src={auth.user.avatar} alt="" />
+                        <img
+                          src={
+                            typeof avatar == "object"
+                              ? window.URL.createObjectURL(avatar)
+                              : auth.user.avatar
+                          }
+                        />
                         <div>
                           <input
                             type="file"
-                            name="avatar"
+                            name="file"
                             id="file_up"
-                            onChange={handleChange}
+                            accept="image/*"
+                            onChange={changeAvatar}
                           />
                         </div>
                       </div>
@@ -291,7 +378,7 @@ const Profile = (props) => {
                           <div className="nls-form-group nls-input-50">
                             <label>PhoneNumber</label>
                             <input
-                              type="number"
+                              type="text"
                               name="phoneNumber"
                               value={phoneNumber}
                               onChange={handleChange}
