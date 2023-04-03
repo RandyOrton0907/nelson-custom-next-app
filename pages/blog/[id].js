@@ -12,7 +12,7 @@ const BlogsDetail = (props) => {
         <section className="nls-s-blogs-detail">
           <div className="nls-container">
             <div className="nls-b-left">
-              <div className="nls-b-item">
+              {/* <div className="nls-b-item">
                 <h2 className="nls-txt-title">Search</h2>
                 <form action="">
                   <div className="nls-form-group">
@@ -22,7 +22,7 @@ const BlogsDetail = (props) => {
                     </button>
                   </div>
                 </form>
-              </div>
+              </div> */}
               <div className="nls-b-item">
                 <h2 className="nls-txt-title">RECENT POSTS</h2>
 
@@ -104,7 +104,7 @@ const BlogsDetail = (props) => {
                   </ul>
                 </div> */}
               </div>
-              <div className="nls-b-body">
+              {/* <div className="nls-b-body">
                 <h2 className="nls-txt-title">3 Comments</h2>
                 <div className="nls-b-comments">
                   <div className="nls-b-item">
@@ -200,7 +200,7 @@ const BlogsDetail = (props) => {
                     </div>
                   </form>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </section>

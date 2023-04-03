@@ -321,7 +321,8 @@ const Profile = (props) => {
                               : auth.user.avatar
                           }
                         />
-                        <div>
+                        <div className="nls-change-avt">
+                          <i class="fa-light fa-camera"></i>
                           <input
                             type="file"
                             name="file"
