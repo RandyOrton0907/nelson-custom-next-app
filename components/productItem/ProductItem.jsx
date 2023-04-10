@@ -9,7 +9,7 @@ import {
 } from "../../stores/Action";
 import Slider from "react-slick";
 import { useEffect } from "react";
-const ProductItem = ({ products, tab, disp, wishlist, cart, qty }) => {
+const ProductItem = ({ products, tab, disp, wishlist, cart, qty, check }) => {
   function createMarkup(items) {
     return { __html: items };
   }
@@ -52,7 +52,6 @@ const ProductItem = ({ products, tab, disp, wishlist, cart, qty }) => {
   function closeModal() {
     setIsOpen(false);
   }
-  const a = wishlist.find((item) => item._id == products._id);
   return (
     <>
       {tab == "0" ? (
@@ -120,7 +119,7 @@ const ProductItem = ({ products, tab, disp, wishlist, cart, qty }) => {
                   </button>
                 </li>
                 <li>
-                  {a ? (
+                  {check == true ? (
                     <button
                       className="nls-add-wishlist active"
                       type="button"
