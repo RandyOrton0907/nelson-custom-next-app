@@ -10,6 +10,7 @@ const Header = () => {
   const { state, dispatch } = useContext(DataContext);
   const { auth, cart } = state;
   const router = useRouter();
+  const [total, setTotal] = useState(0);
   const logUser = () => {
     return (
       <>
@@ -71,7 +72,7 @@ const Header = () => {
     dispatch({ type: "NOFITY", payload: { success: "Logged Out!" } });
     return router.push("/");
   };
-  const [total, setTotal] = useState(0);
+
   useEffect(() => {
     const getTotal = () => {
       const res = cart.reduce((prev, item) => {
@@ -80,7 +81,7 @@ const Header = () => {
       setTotal(res);
     };
     getTotal();
-  }, [total]);
+  }, [cart]);
 
   const [modalIsOpen, setIsOpen] = useState(false);
   const [modalIsOpenMobile, setIsOpenMobile] = useState(false);
@@ -237,7 +238,7 @@ const Header = () => {
                   <div className="nls-b-footer btn">
                     <Link href="/cart">View Cart</Link>
                     {Object.keys(auth).length == 0 ? (
-                      <Link href="/login">View Cart</Link>
+                      <Link href="/user">Checkout</Link>
                     ) : (
                       <Link href="/checkout">Checkout</Link>
                     )}
