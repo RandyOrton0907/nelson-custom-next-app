@@ -118,7 +118,7 @@ const ProductItem = ({ products, tab, disp, wishlist, cart, qty }) => {
                   </button>
                 </li>
                 <li>
-                  {wishlist ? (
+                  {wishlist.find((item) => item._id == products._id) ? (
                     <button
                       className="nls-add-wishlist active"
                       type="button"
