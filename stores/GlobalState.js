@@ -50,6 +50,15 @@ export const DataProvider = ({ children }) => {
   }, [wishlist]);
 
   useEffect(() => {
+    const __next_user = JSON.parse(localStorage.getItem("__next_user"));
+    if (__next_user) dispatch({ type: "AUTH", payload: __next_user });
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("__next_user", JSON.stringify(auth));
+  }, [auth]);
+
+  useEffect(() => {
     const __next_order = JSON.parse(localStorage.getItem("__next_order"));
     if (__next_order) dispatch({ type: "ADD_ORDER", payload: __next_order });
   }, []);

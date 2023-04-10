@@ -1,7 +1,7 @@
 module.exports = {
   env: {
+    BASE_URL: "https://nelson-custom-next-app.vercel.app",
     // BASE_URL: "http://localhost:3000",
-    BASE_URL: "http://nelson-next-app.vercel.app",
     MONGODB_URL:
       "mongodb+srv://Kuroo:KYpLGZSeRvDOBkvK@cluster0.darnt5b.mongodb.net/Nelson?retryWrites=true&w=majority",
     ACCESS_TOKEN_SECRET: `123123123`,

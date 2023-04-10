@@ -224,7 +224,6 @@ header {
                   .nls-del {
                     text-decoration: none;
                     color: $TxtColor;
-                    cursor: pointer;
                     i {
                       font-size: 16px;
                     }
@@ -2133,14 +2132,7 @@ footer {
                       font-size: 18px;
                       box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
                       text-shadow: 0 1px 2px rgb(0 0 0 / 10%);
-                      &.active {
-                        background: #111;
-                        color: #fff;
-                        &:hover {
-                          background: #fff;
-                          color: #111;
-                        }
-                      }
+
                       &:hover {
                         background: #111;
                         color: #fff;
@@ -3501,7 +3493,7 @@ footer {
                   }
                 }
               }
-              .nls-btn-remove {
+              button {
                 padding: 10px;
                 border: none;
                 background: none;
@@ -3511,23 +3503,7 @@ footer {
                   font-size: 18px;
                 }
               }
-              .nls-btn-add {
-                background: #111;
-                color: #fff;
-                padding: 5px 20px;
-                border-radius: 5px;
-                text-transform: uppercase;
-                font-size: 16px;
-                font-weight: 700;
-                cursor: pointer;
-              }
             }
-          }
-          .nls-btn {
-            padding: 5px 20px;
-            background-color: #111;
-            color: #fff;
-            text-transform: uppercase;
           }
         }
       }
