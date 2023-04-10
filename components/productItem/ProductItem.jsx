@@ -118,20 +118,37 @@ const ProductItem = ({ products, tab, disp, wishlist, cart, qty }) => {
                   </button>
                 </li>
                 <li>
-                  <button
-                    className="nls-add-wishlist"
-                    type="button"
-                    onClick={() => {
-                      const a = wishlist.find(
-                        (item) => item._id == products._id
-                      );
-                      a
-                        ? disp(deleteWishlist(wishlist, products._id))
-                        : disp(addWishlist(products, wishlist));
-                    }}
-                  >
-                    <i className="fa-regular fa-heart"></i>
-                  </button>
+                  {wishlist.find((item) => item._id == products._id) ? (
+                    <button
+                      className="nls-add-wishlist active"
+                      type="button"
+                      onClick={() => {
+                        const a = wishlist.find(
+                          (item) => item._id == products._id
+                        );
+                        a
+                          ? disp(deleteWishlist(wishlist, products._id))
+                          : disp(addWishlist(products, wishlist));
+                      }}
+                    >
+                      <i className="fa-regular fa-heart"></i>
+                    </button>
+                  ) : (
+                    <button
+                      className="nls-add-wishlist"
+                      type="button"
+                      onClick={() => {
+                        const a = wishlist.find(
+                          (item) => item._id == products._id
+                        );
+                        a
+                          ? disp(deleteWishlist(wishlist, products._id))
+                          : disp(addWishlist(products, wishlist));
+                      }}
+                    >
+                      <i className="fa-regular fa-heart"></i>
+                    </button>
+                  )}
                 </li>
               </ul>
             </div>
