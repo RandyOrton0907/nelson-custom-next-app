@@ -17,14 +17,14 @@ const Wishlist = (props) => {
   const { auth, wishlist, cart } = state;
   const [products, setProducts] = useState([]);
   const qty = 1;
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getData("products");
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const data = await getData("products");
 
-      return setProducts(data.product);
-    };
-    fetchData();
-  }, []);
+  //     return setProducts(data.product);
+  //   };
+  //   fetchData();
+  // }, []);
   return (
     <DefaultLayout seo={props.seo} breakcrumb={props.breakcrumb}>
       <section className="nls-s-carts">
