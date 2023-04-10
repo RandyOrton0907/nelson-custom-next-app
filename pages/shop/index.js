@@ -68,7 +68,7 @@ const Shop = (props) => {
   const handleSize = (e) => {
     filterSearch({ router, size: e.target.value });
   };
-  const [check, setCheck] = useState(false);
+
   return (
     <>
       <DefaultLayout seo={props.seo} breakcrumb={props.breakcrumb}>
@@ -192,23 +192,11 @@ const Shop = (props) => {
                           wishlist={wishlist}
                           cart={cart}
                           qty={qty}
-                          check={() => {
-                            let a = wishlist.find(
-                              (item) => item._id == product._id
-                            );
-                            if (a) {
-                              setCheck(true);
-                              return check;
-                            } else {
-                              setCheck(false);
-                              return check;
-                            }
-                          }}
                         />
                       ))
                     )}
                     {currentItems.length === 0 ? (
-                      <h2>No Data</h2>
+                      ""
                     ) : (
                       <div className="nls-b-pagination">
                         <ReactPaginate

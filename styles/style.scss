@@ -1854,6 +1854,10 @@ footer {
           margin-bottom: 50px;
           border-bottom: 1px solid #e5e5e5;
           padding-bottom: 45px;
+          &:last-child {
+            margin-bottom: unset;
+            border-bottom: unset;
+          }
           .nls-txt-title {
             font-weight: 600;
             font-size: 18px;
@@ -1881,6 +1885,7 @@ footer {
                 border: none;
                 background: none;
                 cursor: pointer;
+                text-transform: capitalize;
               }
             }
           }
@@ -2293,6 +2298,7 @@ footer {
                   color: $TxtColor;
                   text-decoration: none;
                   padding: 5px;
+                  cursor: pointer;
                 }
                 &.active {
                   a {

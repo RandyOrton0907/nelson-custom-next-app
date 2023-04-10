@@ -9,7 +9,7 @@ import {
 } from "../../stores/Action";
 import Slider from "react-slick";
 import { useEffect } from "react";
-const ProductItem = ({ products, tab, disp, wishlist, cart, qty, check }) => {
+const ProductItem = ({ products, tab, disp, wishlist, cart, qty }) => {
   function createMarkup(items) {
     return { __html: items };
   }
@@ -58,10 +58,9 @@ const ProductItem = ({ products, tab, disp, wishlist, cart, qty, check }) => {
         <div className="nls-b-item" key={products._id}>
           <div className="nls-b-products">
             <span className="nls-b-price-percent">
-              {products.discount == "" || products.discount == 0
-                ? ""
-                : products.discount + "%"}
+              {products.discount ? products.discount + "%" : ""}
             </span>
+
             <div className="nls-img">
               <Link href={"/shop/" + products._id}>
                 <img src={products.images[0]} alt="" />
@@ -81,11 +80,7 @@ const ProductItem = ({ products, tab, disp, wishlist, cart, qty, check }) => {
                   </li>
                   <li>
                     <del className="nls-txt-price-del">
-                      {products.price != "" ||
-                      products.price != null ||
-                      products.price != undefined
-                        ? ""
-                        : "$" + products.price}
+                      {products.price ? "$" + products.price : ""}
                     </del>
                   </li>
                 </ul>
@@ -119,37 +114,20 @@ const ProductItem = ({ products, tab, disp, wishlist, cart, qty, check }) => {
                   </button>
                 </li>
                 <li>
-                  {check == true ? (
-                    <button
-                      className="nls-add-wishlist active"
-                      type="button"
-                      onClick={() => {
-                        const a = wishlist.find(
-                          (item) => item._id == products._id
-                        );
-                        a
-                          ? disp(deleteWishlist(wishlist, products._id))
-                          : disp(addWishlist(products, wishlist));
-                      }}
-                    >
-                      <i className="fa-regular fa-heart"></i>
-                    </button>
-                  ) : (
-                    <button
-                      className="nls-add-wishlist"
-                      type="button"
-                      onClick={() => {
-                        const a = wishlist.find(
-                          (item) => item._id == products._id
-                        );
-                        a
-                          ? disp(deleteWishlist(wishlist, products._id))
-                          : disp(addWishlist(products, wishlist));
-                      }}
-                    >
-                      <i className="fa-regular fa-heart"></i>
-                    </button>
-                  )}
+                  <button
+                    className="nls-add-wishlist"
+                    type="button"
+                    onClick={() => {
+                      const a = wishlist.find(
+                        (item) => item._id == products._id
+                      );
+                      a
+                        ? disp(deleteWishlist(wishlist, products._id))
+                        : disp(addWishlist(products, wishlist));
+                    }}
+                  >
+                    <i className="fa-regular fa-heart"></i>
+                  </button>
                 </li>
               </ul>
             </div>
@@ -183,7 +161,9 @@ const ProductItem = ({ products, tab, disp, wishlist, cart, qty, check }) => {
                   </span>
                 </li>
                 <li>
-                  <del className="nls-txt-price-del">${products.price}</del>
+                  <del className="nls-txt-price-del">
+                    {products.price ? "$" + products.price : ""}
+                  </del>
                 </li>
               </ul>
             </div>
