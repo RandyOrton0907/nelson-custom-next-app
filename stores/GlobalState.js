@@ -57,7 +57,14 @@ export const DataProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem("__next_order", JSON.stringify(order));
   }, [order]);
+  useEffect(() => {
+    const __next_user = JSON.parse(localStorage.getItem("__next_user"));
+    if (__next_user) dispatch({ type: "AUTH", payload: __next_user });
+  }, []);
 
+  useEffect(() => {
+    localStorage.setItem("__next_user", JSON.stringify(auth));
+  }, [auth]);
   return (
     <DataContext.Provider value={{ state, dispatch }}>
       {children}
