@@ -38,7 +38,7 @@ const Shop = (props) => {
 
   // paginate
   const [itemOffset, setItemOffset] = useState(0);
-  const itemsPerPage = 6;
+  const itemsPerPage = 9;
   const endOffset = itemOffset + itemsPerPage;
   // console.log(`Loading items from ${itemOffset} to ${endOffset}`);
   const currentItems = products.slice(itemOffset, endOffset);
@@ -68,7 +68,6 @@ const Shop = (props) => {
   const handleSize = (e) => {
     filterSearch({ router, size: e.target.value });
   };
-
   return (
     <>
       <DefaultLayout seo={props.seo} breakcrumb={props.breakcrumb}>
@@ -192,6 +191,9 @@ const Shop = (props) => {
                           wishlist={wishlist}
                           cart={cart}
                           qty={qty}
+                          wishlistId={() => {
+                            wishlist.find((item) => item._id == product._id);
+                          }}
                         />
                       ))
                     )}

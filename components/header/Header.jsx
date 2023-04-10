@@ -16,7 +16,7 @@ const Header = () => {
       <>
         <div className="nls-btn-hvr">
           <Link href="">
-            <img className="nls-avatar" src={auth.user.avatar} alt="" />
+            <i class="fa-solid fa-user"></i>
           </Link>
           <ul className="nls-b-content">
             <li>
