@@ -79,7 +79,7 @@ function Modals({ itemId }) {
   return (
     <>
       <div>
-        <button onClick={openModal}>
+        <button className="nls-btn-remove" onClick={openModal}>
           <i className="fa-solid fa-trash-xmark"></i>
         </button>
         <Modal
