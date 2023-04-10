@@ -57,9 +57,7 @@ const ProductItem = ({ products, tab, disp, wishlist, cart, qty }) => {
         <div className="nls-b-item" key={products._id}>
           <div className="nls-b-products">
             <span className="nls-b-price-percent">
-              {products.discount === "" ||
-              products.discount === 0 ||
-              products.discount === undefined
+              {products.discount == "" || products.discount == 0
                 ? ""
                 : products.discount + "%"}
             </span>
@@ -120,38 +118,20 @@ const ProductItem = ({ products, tab, disp, wishlist, cart, qty }) => {
                   </button>
                 </li>
                 <li>
-                  {wishlist.find((item) => item._id == products._id) !=
-                  undefined ? (
-                    <button
-                      className="nls-add-wishlist active"
-                      type="button"
-                      onClick={() => {
-                        const a = wishlist.find(
-                          (item) => item._id == products._id
-                        );
-                        a
-                          ? disp(deleteWishlist(wishlist, products._id))
-                          : disp(addWishlist(products, wishlist));
-                      }}
-                    >
-                      <i className="fa-regular fa-heart"></i>
-                    </button>
-                  ) : (
-                    <button
-                      className="nls-add-wishlist"
-                      type="button"
-                      onClick={() => {
-                        const a = wishlist.find(
-                          (item) => item._id == products._id
-                        );
-                        a
-                          ? disp(deleteWishlist(wishlist, products._id))
-                          : disp(addWishlist(products, wishlist));
-                      }}
-                    >
-                      <i className="fa-regular fa-heart"></i>
-                    </button>
-                  )}
+                  <button
+                    className="nls-add-wishlist"
+                    type="button"
+                    onClick={() => {
+                      const a = wishlist.find(
+                        (item) => item._id == products._id
+                      );
+                      a
+                        ? disp(deleteWishlist(wishlist, products._id))
+                        : disp(addWishlist(products, wishlist));
+                    }}
+                  >
+                    <i className="fa-regular fa-heart"></i>
+                  </button>
                 </li>
               </ul>
             </div>
