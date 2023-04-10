@@ -8,8 +8,11 @@ import filterSearch from "../../utils/filterSearch";
 import { useRouter } from "next/router";
 const Header = () => {
   const { state, dispatch } = useContext(DataContext);
+
   const { auth, cart } = state;
   const router = useRouter();
+  const [total, setTotal] = useState(0);
+
   const logUser = () => {
     return (
       <>
@@ -71,17 +74,6 @@ const Header = () => {
     dispatch({ type: "NOFITY", payload: { success: "Logged Out!" } });
     return router.push("/");
   };
-  const [total, setTotal] = useState(0);
-  useEffect(() => {
-    const getTotal = () => {
-      const res = cart.reduce((prev, item) => {
-        return prev + item.currentPrice * item.quantity;
-      }, 0);
-      setTotal(res);
-    };
-    getTotal();
-  }, [total]);
-
   const [modalIsOpen, setIsOpen] = useState(false);
   const [modalIsOpenMobile, setIsOpenMobile] = useState(false);
 
@@ -106,6 +98,15 @@ const Header = () => {
     filterSearch({ router, search: search });
   };
 
+  useEffect(() => {
+    const getTotal = () => {
+      const res = cart.reduce((prev, item) => {
+        return prev + item.currentPrice * item.quantity;
+      }, 0);
+      setTotal(res);
+    };
+    getTotal();
+  }, [cart]);
   return (
     <>
       <header>
@@ -204,7 +205,10 @@ const Header = () => {
                       cart.map((item) => (
                         <div className="nls-b-item" key={item._id}>
                           <div className="nls-img">
-                            <img src={item.images[0]} alt="" />
+                            <img
+                              src={item.images ? item.images[0] : null}
+                              alt=""
+                            />
                           </div>
                           <div className="nls-content-item">
                             <div className="nls-b-header">
@@ -231,13 +235,13 @@ const Header = () => {
                   </div>
                   <div className="nls-b-body carts">
                     <h5>
-                      Subtotal: <span>${total}</span>
+                      Subtotal: <span> ${total} </span>
                     </h5>
                   </div>
                   <div className="nls-b-footer btn">
                     <Link href="/cart">View Cart</Link>
                     {Object.keys(auth).length == 0 ? (
-                      <Link href="/login">View Cart</Link>
+                      <Link href="/user">Checkout</Link>
                     ) : (
                       <Link href="/checkout">Checkout</Link>
                     )}
