@@ -10,6 +10,7 @@ const Header = () => {
   const { state, dispatch } = useContext(DataContext);
   const { auth, cart } = state;
   const router = useRouter();
+  const [total, setTotal] = useState(0);
   const logUser = () => {
     return (
       <>
@@ -71,7 +72,7 @@ const Header = () => {
     dispatch({ type: "NOFITY", payload: { success: "Logged Out!" } });
     return router.push("/");
   };
-  const [total, setTotal] = useState(0);
+
   useEffect(() => {
     const getTotal = () => {
       const res = cart.reduce((prev, item) => {
