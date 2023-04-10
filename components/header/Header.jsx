@@ -237,7 +237,7 @@ const Header = () => {
                   <div className="nls-b-footer btn">
                     <Link href="/cart">View Cart</Link>
                     {Object.keys(auth).length == 0 ? (
-                      <Link href="/login">View Cart</Link>
+                      <Link href="/user">Checkout</Link>
                     ) : (
                       <Link href="/checkout">Checkout</Link>
                     )}
